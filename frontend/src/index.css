@@ -1154,6 +1154,33 @@ body {
   box-shadow: 0 10px 20px -8px rgba(225, 29, 72, 0.55);
 }
 
+.job-management-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 155px;
+}
+
+.job-management-actions .edit-job-btn,
+.job-management-actions .delete-job-btn {
+  width: auto;
+  min-height: 38px;
+}
+
+.job-management-actions .delete-job-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
+.job-management-actions .edit-job-btn:focus-visible,
+.job-management-actions .delete-job-btn:focus-visible {
+  outline: 3px solid rgba(79, 70, 229, 0.35);
+  outline-offset: 2px;
+}
+
 .view-candidate-btn {
   background: transparent;
   color: var(--ed-brand);

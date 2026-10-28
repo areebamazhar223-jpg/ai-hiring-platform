@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createJob } from "../services/api";
 
-function PostJob({ setPage }) {
+function PostJob() {
   const [formData, setFormData] = useState({
     title: "",
     company: "",
@@ -84,13 +84,6 @@ function PostJob({ setPage }) {
         {/* HEADER */}
 
         <div className="mb-5">
-
-          <button
-            className="btn btn-outline-secondary mb-4"
-            onClick={() => setPage("employer-dashboard")}
-          >
-            ← Back to Dashboard
-          </button>
 
           <span className="d-block text-success fw-semibold mb-2">
             EMPLOYER

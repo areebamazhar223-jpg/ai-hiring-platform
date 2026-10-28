@@ -28,6 +28,8 @@ function EmployerDashboard({ setPage }) {
 
   const [resumeLoading, setResumeLoading] = useState(false);
   const [resumeError, setResumeError] = useState("");
+  const [deletingJob, setDeletingJob] = useState(null);
+  const [jobDeleteError, setJobDeleteError] = useState("");
 
 
   // ==========================================
@@ -305,9 +307,9 @@ function EmployerDashboard({ setPage }) {
       return;
     }
 
-
     try {
-
+      setDeletingJob(jobId);
+      setJobDeleteError("");
       await deleteJob(jobId);
 
 
@@ -346,17 +348,13 @@ function EmployerDashboard({ setPage }) {
 
 
     } catch (error) {
-
       console.error(
         "Delete Job Error:",
         error
       );
-
-      alert(
-        error.message ||
-        "Failed to delete job."
-      );
-
+      setJobDeleteError(error.message || "Failed to delete job. Please try again.");
+    } finally {
+      setDeletingJob(null);
     }
 
   };
@@ -806,6 +804,12 @@ function EmployerDashboard({ setPage }) {
             Jobs posted by your company.
           </p>
 
+          {jobDeleteError && (
+            <div className="alert alert-danger" role="alert">
+              {jobDeleteError}
+            </div>
+          )}
+
 
           {!dashboard?.jobs ||
           dashboard.jobs.length === 0 ? (
@@ -884,10 +888,12 @@ function EmployerDashboard({ setPage }) {
 
                         <td>
 
-                          <div className="d-flex gap-2">
+                          <div className="job-management-actions">
 
                             <button
+                              type="button"
                               className="edit-job-btn"
+                              aria-label={`Edit ${job.title}`}
                               onClick={() =>
                                 handleEditJob(job)
                               }
@@ -896,14 +902,17 @@ function EmployerDashboard({ setPage }) {
                             </button>
 
                             <button
+                              type="button"
                               className="delete-job-btn"
+                              aria-label={`Delete ${job.title}`}
+                              disabled={deletingJob === job._id}
                               onClick={() =>
                                 handleDeleteJob(
                                   job._id
                                 )
                               }
                             >
-                              Delete
+                              {deletingJob === job._id ? "Deleting…" : "Delete"}
                             </button>
 
                           </div>

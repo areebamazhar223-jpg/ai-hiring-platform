@@ -424,7 +424,7 @@ function App() {
       {/* POST JOB  (sirf employer) */}
       {page === "post-job" && (
         <ProtectedRoute role="employer" setPage={setPage}>
-          <PostJob setPage={setPage} />
+          <PostJob />
         </ProtectedRoute>
       )}
     </>
