@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+backend/.venv/
+**/.env
+**/.env.*
+!**/.env.example
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Node
+**/node_modules/
+**/dist/
+
+# Obsolete Vite scaffold inside the backend directory
+backend/frontend/
+
+# Local/editor
+.vscode/
+.idea/
+*.log
